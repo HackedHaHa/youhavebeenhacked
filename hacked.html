@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>System Alert</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body {
+    margin: 0;
+    background: #111;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .phone {
+    width: 360px;
+    height: 720px;
+    background: #000;
+    border-radius: 30px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.8);
+    overflow: hidden;
+    color: white;
+    position: relative;
+  }
+
+  .status-bar {
+    height: 30px;
+    padding: 5px 15px;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    background: #000;
+    opacity: 0.8;
+  }
+
+  .alert {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .alert h1 {
+    color: #ff3b3b;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+
+  .notification {
+    background: #1c1c1e;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 15px;
+    font-size: 0.95rem;
+  }
+
+  .progress {
+    width: 90%;
+    height: 10px;
+    background: #333;
+    border-radius: 5px;
+    margin: 15px auto;
+    overflow: hidden;
+  }
+
+  .bar {
+    height: 100%;
+    width: 0%;
+    background: #ff3b3b;
+    transition: width 0.5s;
+  }
+
+  .countdown {
+    font-size: 2.5rem;
+    color: #ff3b3b;
+    margin-top: 10px;
+  }
+
+  .reveal {
+    display: none;
+    padding: 30px;
+    text-align: center;
+    animation: fadeIn 1s ease forwards;
+  }
+
+  .reveal h1 {
+    color: #00ffcc;
+  }
+
+  .ieee {
+    margin-top: 15px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #00bcd4;
+  }
+
+  .safe {
+    font-size: 0.75rem;
+    color: #aaa;
+    margin-top: 20px;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="phone" id="hackScreen">
+  <div class="status-bar">
+    <span>9:41</span>
+    <span>📶 🔋</span>
+  </div>
+
+  <div class="alert">
+    <h1>Security Threat Detected</h1>
+    <p>Your device may be compromised</p>
+  </div>
+
+  <div class="notification">Unusual network activity detected</div>
+  <div class="notification">Unknown process accessing permissions</div>
+
+  <div class="progress">
+    <div class="bar" id="bar"></div>
+  </div>
+
+  <div class="alert">
+    <p>System scan in progress</p>
+    <div class="countdown" id="countdown">10</div>
+  </div>
+</div>
+
+<div class="phone reveal" id="revealScreen">
+  <h1>Relax 😄</h1>
+  <p>This was a <strong>cybersecurity simulation</strong>.</p>
+  <p>No data was accessed.<br>No device was hacked.</p>
+
+  <p><strong>Fear is the attacker’s favorite tool.</strong></p>
+
+  <div class="ieee">
+    IEEE Cybersecurity Awareness Session
+  </div>
+
+  <div class="safe">
+    This demonstration was safe, controlled, and collected no information.
+  </div>
+</div>
+
+<script>
+  const bar = document.getElementById("bar");
+  const countdownEl = document.getElementById("countdown");
+  const hackScreen = document.getElementById("hackScreen");
+  const revealScreen = document.getElementById("revealScreen");
+
+  let timeLeft = 10;
+  let progress = 0;
+
+  const timer = setInterval(() => {
+    timeLeft--;
+    progress += 20;
+
+    countdownEl.textContent = timeLeft;
+    bar.style.width = progress + "%";
+
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      setTimeout(() => {
+        hackScreen.style.display = "none";
+        revealScreen.style.display = "block";
+      }, 1200);
+    }
+  }, 1000);
+</script>
+
+</body>
+</html>
